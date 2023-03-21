@@ -133,6 +133,17 @@ class hardChallenges
         return max($highestIndexArray) . array_search(max($highestIndexArray), $highestIndexArray);
     }
 
+    // Create a function that takes a number as its only argument and returns true if it's less than or equal to zero, otherwise return false.
+    public function lessThanOrEqualToZero($number)
+    {
+        if (!is_numeric($number)) {
+            return 'Please enter a number';
+        }
+
+        return $number <= 0 ? true : false;
+    }
+
+
 
     // Write a function that returns true if the knights are placed on a chessboard such that no knight can capture another knight. Here, 0s represent empty squares and 1s represent knights.
     // Knights can be present in any of the 64 squares. No other pieces except knights exist.
@@ -154,6 +165,28 @@ class hardChallenges
             if ($key % 2 == 0)
                 echo $value;
         }
+    }
+
+
+    // Given a string including a bunch of characters and numbers, return the sum of all the numbers in the string. Note that multiple digits next to each other are counted as a whole number rather than separate digits.
+    public function grabNumberSum(string $string)
+    {
+        preg_match_all('!\d+!', $string, $matches);
+
+        return array_reduce($matches[0], function ($v, $w) {
+            return $v + $w;
+        });
+    }
+
+
+
+    // Create a function that takes both a string and an array of numbers as arguments. Rearrange the letters in the string to be in the order specified by the index numbers. Return the "remixed" string.
+    public function remix($str, $arr)
+    {
+        $combined = array_combine($arr, str_split($str));
+        ksort($combined);
+
+        return implode($combined);
     }
 }
 
@@ -198,6 +231,10 @@ $multiLineComment = "/**//**////**/";
 $falseFormatted = "///*/**/";
 $falseFormatted2 = "/////";
 $sentence = 'This is Valhalla';
+$stringGrabNumber = 'aeiou250abc10';
+
+
+
 
 // echo ("sum of digits in " . $number . " is " . $challenge->sumDigit($number));
 // echo $challenge->missingLetter(["k", "l", "o", "p"]);
@@ -209,4 +246,4 @@ $sentence = 'This is Valhalla';
 
 
 // echo $challenge->longestStreak($dateArray);
-echo $challenge->cannotCapture($chessBoard);
+echo $challenge->remix("abcd", [0, 3, 1, 2]);
